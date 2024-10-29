@@ -1,0 +1,99 @@
+﻿@page "/counter"
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+@page  "/stock-chart/stock-chart" 
+@usando Syncfusion.Blazor.Charts 
+@usando Syncfusion.Blazor 
+@usando ThemeHelper 
+@inyectar NavigationManager NavigationManager 
+@usando System.Net.Http.Json 
+@inyectar HttpClient Http
+@si (Fuente de datos == null )
+{
+    <div  clase = "stockchartloader" > </div>
+}
+demás
+{
+    <div  class = " @loadClass" > </div> 
+    <div  class = " @loadDiv"> 
+        <SfStockChart  Título = "Precio de la acción de AAPL"  Tema = " @theme"> 
+            <StockChartEvents  OnLoaded = " @ChartLoaded"> </StockChartEvents> 
+            <StockChartPrimaryXAxis> 
+                <StockChartAxisMajorGridLines  Ancho = " 0 "> </StockChartAxisMajorGridLines> 
+                <StockChartAxisCrosshairTooltip  Habilitar = "verdadero"> </StockChartAxisCrosshairTooltip > 
+            </StockChartPrimaryXAxis> 
+            <StockChartPrimaryYAxis> 
+                <StockChartAxisLineStyle  Ancho = "0" > </StockChartAxisLineStyle> 
+                <StockChartAxisMajorTickLines  Ancho = "0"> </StockChartAxisMajorTickLines> 
+            </StockChartPrimaryYAxis> 
+            <StockChartTooltipSettings  Habilitar = "verdadero"> </StockChartTooltipSettings> 
+            <StockChartCrosshairSettings  Habilitar = "verdadero"> </StockChartCrosshairSettings> 
+            <StockChartSeriesCollection> 
+                <StockChartSeries  Fuente de datos = " @Fuente de datos "  Tipo = "ChartSeriesType.Vela"> </StockChartSeries> 
+            </StockChartSeriesCollection> 
+            <StockChartChartArea> 
+                <StockChartChartAreaBorder  Width = "0"> </StockChartChartAreaBorder> 
+            </StockChartChartArea> 
+        </SfStockChart> 
+    </div > 
+    <style> .stockchartloader {
+             border
+        : 6px sólido #f3f3f3 ;
+             borde superior : 6px sólido #7a0fff ;
+             ancho : 40px ;
+             alto : 40px ;
+             posición : absoluta;
+             superior : 46% ;
+             izquierda : 46% ;
+             radio del borde : 50% ;
+             -webkit-animation : cargador 2s lineal infinito;
+             animación : cargador 2s lineal infinito;
+        }
+        .stockchartdiv {
+             visibilidad : oculta;
+        }
+        div [id*= "_stockChart_rangeSelector_leftTooltip" ] , div [id*= "_stockChart_rangeSelector_rightTooltip" ] {
+             arriba : 10px  !importante ;
+        }
+        div [id*= "_selector_Elemento_Secundario" ] {
+             transformar : traducir ( 0px , @translateY) !importante ;
+        }
+        .e-tbar-btn {
+             color del borde : transparente !importante ;
+        }
+    </style>
+}
+@code { 
+    public List<ChartSeriesType> nulldata = new List<ChartSeriesType>();
+     private ChartData[] DataSource;
+     cadena translateY = "-5px" ;
+     protegido  anular  tarea asíncrona OnInitializedAsync()
+    {
+        Antes de renderizar();
+        DataSource = await Http.GetFromJsonAsync<ChartData[]>(NavigationManager.BaseUri + SampleService.WebAssetsPath + "datos/gráfico-de-acciones/gráfico-datos.json" );
+    }
+     clase pública ChartData
+    {
+        public DateTime date { obtener;  establecer; }
+         public  double open { obtener;  establecer; }
+         public  double low { obtener;  establecer; }
+         public  double close { obtener;  establecer; }
+         public  double high { obtener;  establecer; }
+         public  double volume { obtener;  establecer; }
+    }
+    cadena loadClass = "stockchartloader" ;
+     cadena loadDiv = "stockchartdiv" ;
+     void ChartLoaded(StockChartEventArgs args)
+    {
+        cargaClase = "" ;
+        cargaDiv = "" ;
+        EstadoHasChanged();
+    }
+    Tema tema = Theme.Bootstrap4;
+    vacío BeforeRender()
+    {
+        tema = ThemeHelper.GetCurrentTheme(NavigationManager.Uri);
+    }
+}

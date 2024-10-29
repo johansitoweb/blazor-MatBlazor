@@ -1,0 +1,6 @@
+C:\Users\08\source\repos\MatBlazor-blazor-App\MatBlazor-blazor-App\obj\Debug\net8.0\MatBlazor-blazor-App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\08\source\repos\MatBlazor-blazor-App\MatBlazor-blazor-App\obj\Debug\net8.0\MatBlazor-blazor-App.AssemblyInfoInputs.cache
+C:\Users\08\source\repos\MatBlazor-blazor-App\MatBlazor-blazor-App\obj\Debug\net8.0\MatBlazor-blazor-App.AssemblyInfo.cs
+C:\Users\08\source\repos\MatBlazor-blazor-App\MatBlazor-blazor-App\obj\Debug\net8.0\MatBlazor-blazor-App.csproj.CoreCompileInputs.cache
+C:\Users\08\source\repos\MatBlazor-blazor-App\MatBlazor-blazor-App\obj\Debug\net8.0\MatBlazor-blazor-App.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\08\source\repos\MatBlazor-blazor-App\MatBlazor-blazor-App\obj\Debug\net8.0\MatBlazor-blazor-App.sourcelink.json
